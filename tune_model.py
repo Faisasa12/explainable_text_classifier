@@ -9,7 +9,7 @@ print(tokenized_dataset["train"][0])
 
 tokenizer = AutoTokenizer.from_pretrained("distilbert-base-uncased", clean_up_tokenization_spaces = True)
 
-model = AutoModelForSequenceClassification("distilbert-base-uncased", num_labels = 2)
+model = AutoModelForSequenceClassification.from_pretrained("distilbert-base-uncased", num_labels = 2)
 
 training_arguments = TrainingArguments(
     output_dir = "./output",
