@@ -10,4 +10,6 @@ def tokenize(record):
 
 tokenized_dataset = dataset.map(tokenize, batched = True)
 
+tokenized_dataset.set_format(type = "torch", columns = ["label", "input_ids", "attention_mask"])
+
 print(tokenized_dataset["train"][0])
