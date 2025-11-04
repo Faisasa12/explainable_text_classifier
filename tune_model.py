@@ -1,5 +1,6 @@
 import pickle
 from transformers import AutoTokenizer, AutoModelForSequenceClassification, TrainingArguments, Trainer
+import evaluate
 
 with open("data/tokenized_dataset.pkl", "rb") as file:
     tokenized_dataset = pickle.load(file)
@@ -23,4 +24,13 @@ training_arguments = TrainingArguments(
     logging_steps = 50,
     load_best_model_at_end = True
 )
+
+metric = evaluate.load('accuracy')
+
+def compute_metrics(eval_pred):
+    logits, labels =  eval_pred
+    
+    preds = logits.argmax(-1)
+    
+    return metric.compute(predictions = preds, references = labels)
 
