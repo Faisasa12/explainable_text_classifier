@@ -1,5 +1,6 @@
 from datasets import load_dataset
 from transformers import AutoTokenizer
+import pickle
 
 dataset = load_dataset("sst2") 
 
@@ -12,4 +13,5 @@ tokenized_dataset = dataset.map(tokenize, batched = True)
 
 tokenized_dataset.set_format(type = "torch", columns = ["label", "input_ids", "attention_mask"])
 
-print(tokenized_dataset["train"][0])
+with open("data/tokenized_dataset.pkl", "wb") as file:
+    pickle.dump(tokenized_dataset, file)
