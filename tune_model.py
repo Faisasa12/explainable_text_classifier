@@ -34,3 +34,12 @@ def compute_metrics(eval_pred):
     
     return metric.compute(predictions = preds, references = labels)
 
+trainer = Trainer(
+    model = model,
+    args = training_arguments,
+    train_dataset = tokenized_dataset["train"],
+    eval_dataset = tokenized_dataset["validation"],
+    tokenizer = tokenizer,
+    compute_metrics = compute_metrics
+)
+
