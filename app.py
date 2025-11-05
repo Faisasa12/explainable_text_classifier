@@ -6,7 +6,6 @@ from lime.lime_text import LimeTextExplainer
 import shap
 import torch
 import numpy as np
-import matplotlib.pyplot as plt
 
 model_hf_path = 'Faisasa12/personal-finetuned-distilbert'
 
