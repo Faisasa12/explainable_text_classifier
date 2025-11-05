@@ -1,11 +1,17 @@
 import pickle
 from transformers import AutoTokenizer, AutoModelForSequenceClassification, TrainingArguments, Trainer
+import torch
 import evaluate
 
-with open("data/tokenized_dataset.pkl", "rb") as file:
-    tokenized_dataset = pickle.load(file)
+with open("data/tokenized_subaset_train.pkl", "rb") as file:
+    train_dataset = pickle.load(file)
     
-print(tokenized_dataset["train"][0])
+with open("data/tokenized_dataset_val.pkl", "rb") as file:
+    val_dataset = pickle.load(file)
+    
+with open("data/tokenized_dataset_test.pkl", "rb") as file:
+    test_dataset = pickle.load(file)
+    
 
 tokenizer = AutoTokenizer.from_pretrained("distilbert-base-uncased", clean_up_tokenization_spaces = True)
 
@@ -13,13 +19,11 @@ model = AutoModelForSequenceClassification.from_pretrained("distilbert-base-unca
 
 training_arguments = TrainingArguments(
     output_dir = "./output",
-    overwrite_output_dir = True,
     eval_strategy = "epoch",
     save_strategy = "epoch",
     learning_rate = 0.00003,
-    per_device_eval_batch_size = 32,
-    per_device_train_batch_size = 32,
-    num_train_epochs = 4,
+    dataloader_num_workers = 0,
+    num_train_epochs = 2,
     logging_dir = "./log",
     logging_steps = 50,
     load_best_model_at_end = True
@@ -37,9 +41,12 @@ def compute_metrics(eval_pred):
 trainer = Trainer(
     model = model,
     args = training_arguments,
-    train_dataset = tokenized_dataset["train"],
-    eval_dataset = tokenized_dataset["validation"],
+    train_dataset = train_dataset,
+    eval_dataset = val_dataset,
     tokenizer = tokenizer,
     compute_metrics = compute_metrics
 )
 
+trainer.train()
+
+trainer.save_model("./models/finetuned-distilbert")
