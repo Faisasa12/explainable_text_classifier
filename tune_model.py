@@ -50,3 +50,5 @@ trainer = Trainer(
 trainer.train()
 
 trainer.save_model("./models/finetuned-distilbert")
+
+#Fine tuned model is deployed to hugging face
