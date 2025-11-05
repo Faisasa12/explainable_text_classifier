@@ -8,7 +8,7 @@ import matplotlib.pyplot as plt
 
 
 model = AutoModelForSequenceClassification.from_pretrained('./models/finetuned-distilbert')
-tokenizer = AutoTokenizer.from_pretrained('distilbert-base-uncased', clean_up_tokenization_spaces=True)
+tokenizer = AutoTokenizer.from_pretrained('./models/finetuned-distilbert', clean_up_tokenization_spaces=True)
 
 
 
