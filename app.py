@@ -61,7 +61,12 @@ if st.button('Analyze') and sentence.strip() != '':
     
     shap_vals = shap_explainer([sentence])
     
-    shap_html = f"<head>{shap.getjs()}</head><body>{shap.plots.text(shap_vals[0], display = False)}</body>"
+    shap_html =f"""
+        <head>{shap.getjs()}</head>
+        <body style='background-color:#D3D3D3;'>
+            {shap.plots.text(shap_vals[0], display=False)}
+        </body>
+        """
     components.html(shap_html, height=300)
     
     
