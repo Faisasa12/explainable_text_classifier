@@ -9,6 +9,11 @@
 
 ---
 
+## Demo Video
+[![Demo Video](https://img.youtube.com/vi/uaWrlwdVBQ0/0.jpg)](https://www.youtube.com/watch?v=uaWrlwdVBQ0)
+
+---
+
 ## Dataset
 - **Source**: [Stanford Sentiment Treebank](https://huggingface.co/datasets/stanfordnlp/sst2)
 - **Classes**: Binary Classification, **NEGATIVE** or **POSITIVE**
