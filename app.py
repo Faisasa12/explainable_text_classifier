@@ -75,6 +75,3 @@ if st.button('Analyze') and sentence.strip() != '':
     fig = lime_exp.as_pyplot_figure()
     
     st.pyplot(fig)
-    
-    st.write("Top influential words (word, weight):")
-    st.write(lime_exp.as_list())
